@@ -9,6 +9,8 @@ class CentralCircle(private val sketch: PApplet) {
         sketch.width / 5f
     }
 
+    lateinit var items: ArrayList<CircleWithPattern>
+
     var distanceFromItem = 0f
     var sizeOfItem = 10f
 
@@ -44,9 +46,15 @@ class CentralCircle(private val sketch: PApplet) {
         sketch.endShape(PConstants.CLOSE)
     }
 
+    fun applyObjects(objects :ArrayList<CircleWithPattern>){
+        this.items = objects
+    }
+
     fun display() {
+        sketch.fill(0f, 0f)
         sketch.beginShape()
         sketch.pushMatrix()
+        items[0].display()
         sketch.translate(sketch.width/2f, sketch.height/2f)
         updateVertices()
         sketch.popMatrix()

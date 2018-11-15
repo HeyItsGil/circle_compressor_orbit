@@ -2,24 +2,28 @@ import processing.core.*
 import kotlin.math.PI
 
 class CircleWithPattern(private val sketch: PApplet) {
-    private val radius: Int by lazy { sketch.width/2 }
-    private val innerCircleRadius by lazy { radius/4f }
+    var radius = sketch.width/2f
+    var innerCircleRadius = radius/4f
     var angle = 2 * PI
 
 
-    fun display(colourRange: Float, alphaRange: Float){
+    fun display(colourRange: Float = 0f, alphaRange: Float = 200f){
         sketch.pushMatrix()
         sketch.translate(sketch.width/2f, sketch.height/2f)
         sketch.stroke(0)
         sketch.ellipse(0f,0f, radius.toFloat(), radius.toFloat())
-        sketch.fill(colourRange, 85.9f, 100f, 200f)
-        sketch.noStroke()
         innerCirclesOne()
 //        innerCirclesTwo()
 //        innerCirclesThree()
 //        innerCirclesFour()
         angle+= 0.015
         sketch.popMatrix()
+    }
+
+    fun setSize(radius: Float) {
+        this.radius = radius
+        this.innerCircleRadius = this.radius/4
+
     }
 
     fun drawCircle(x: Float, y: Float, radiusFactor: Float = 1f){

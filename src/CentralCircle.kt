@@ -27,34 +27,42 @@ class CentralCircle(private val sketch: PApplet) {
     }
 
     private fun updateVertices(){
-        for (vertex in vertices) {
-            //Mouse position does not get updated with the translate() method
-            val currentMousePosition = PVector(sketch.mouseX.toFloat() - sketch.width / 2, sketch.mouseY.toFloat() - sketch.height / 2)
-            var force = r
+        for (items in this.items){
+            sketch.beginShape()
+            for (vertex in vertices) {
+                //Mouse position does not get updated with the translate() method
+//                val currentMousePosition = PVector(sketch.mouseX.toFloat() - sketch.width / 2, sketch.mouseY.toFloat() - sketch.height / 2)
+                val currentObjectPosition = PVector(items.xPos, items.yPos)
+                sketch.ellipse(currentObjectPosition.x, currentObjectPosition.y, 50f, 50f)
+                var force = r
 
-            val distanceBetweenObjectAndVertexCurrent = PVector.dist(currentMousePosition, vertex.currentLocation)
+                val distanceBetweenObjectAndVertexCurrent = PVector.dist(currentObjectPosition, vertex.currentLocation)
 
-            vertex.currentLocation.normalize()
-            if (distanceBetweenObjectAndVertexCurrent < distanceFromItem) {
-                val vertexLimiter = map(distanceBetweenObjectAndVertexCurrent, 0f, distanceFromItem, sizeOfItem, 0f)
-                force -= vertexLimiter
+                vertex.currentLocation.normalize()
+                if (distanceBetweenObjectAndVertexCurrent < distanceFromItem) {
+                    val vertexLimiter = map(distanceBetweenObjectAndVertexCurrent, 0f, distanceFromItem, sizeOfItem, 0f)
+                    force -= vertexLimiter
+                }
+                vertex.currentLocation.mult(force)
+
+                sketch.vertex(vertex.currentLocation.x, vertex.currentLocation.y)
             }
-            vertex.currentLocation.mult(force)
-
-            sketch.vertex(vertex.currentLocation.x, vertex.currentLocation.y)
+            sketch.endShape(PConstants.CLOSE)
         }
-        sketch.endShape(PConstants.CLOSE)
     }
 
     fun applyObjects(objects :ArrayList<CircleWithPattern>){
         this.items = objects
+        for (items in this.items){
+            items.setSize(r/2)
+        }
+
     }
 
     fun display() {
         sketch.fill(0f, 0f)
-        sketch.beginShape()
         sketch.pushMatrix()
-        items[0].display()
+        items[0].display(yPos = -r*1.2f)
         sketch.translate(sketch.width/2f, sketch.height/2f)
         updateVertices()
         sketch.popMatrix()

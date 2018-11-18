@@ -5,20 +5,31 @@ class CircleWithPattern(private val sketch: PApplet) {
     var radius = sketch.width/2f
     var innerCircleRadius = radius/4f
     var angle = 2 * PI
+    var xPos = 0f
+    var yPos = 0f
 
-
-    fun display(colourRange: Float = 0f, alphaRange: Float = 200f){
+    fun display(colourRange: Float = 0f, alphaRange: Float = 200f, xPos: Float = 0f, yPos: Float = 0f){
         sketch.pushMatrix()
         sketch.translate(sketch.width/2f, sketch.height/2f)
         sketch.stroke(0)
-        sketch.ellipse(0f,0f, radius.toFloat(), radius.toFloat())
+        this.xPos = xPos
+        this.yPos = yPos
+        sketch.ellipse(xPos,yPos, radius.toFloat(), radius.toFloat())
+        sketch.pushMatrix()
+        sketch.translate(xPos, yPos)
         innerCirclesOne()
 //        innerCirclesTwo()
 //        innerCirclesThree()
 //        innerCirclesFour()
+        sketch.popMatrix()
         angle+= 0.015
         sketch.popMatrix()
     }
+//
+//    fun display(){
+//
+//        this.display()
+//    }
 
     fun setSize(radius: Float) {
         this.radius = radius

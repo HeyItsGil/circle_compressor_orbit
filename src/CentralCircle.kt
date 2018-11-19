@@ -15,7 +15,8 @@ class CentralCircle(private val sketch: PApplet) {
     var sizeOfItem = 10f
 
     init {
-        distanceFromItem = r / 4
+        distanceFromItem = r / 3
+        sizeOfItem = distanceFromItem * 0.85f
         val sides = 360
         val angle = 360 / sides
         for (i in 0 until sides) {
@@ -27,13 +28,13 @@ class CentralCircle(private val sketch: PApplet) {
     }
 
     private fun updateVertices(){
-        for (items in this.items){
+        for (item in this.items){
             sketch.beginShape()
             for (vertex in vertices) {
                 //Mouse position does not get updated with the translate() method
-//                val currentMousePosition = PVector(sketch.mouseX.toFloat() - sketch.width / 2, sketch.mouseY.toFloat() - sketch.height / 2)
-                val currentObjectPosition = PVector(items.xPos, items.yPos)
-                sketch.ellipse(currentObjectPosition.x, currentObjectPosition.y, 50f, 50f)
+//                val currentObjectPosition = PVector(sketch.mouseX.toFloat() - sketch.width / 2, sketch.mouseY.toFloat() - sketch.height / 2)
+                val currentObjectPosition = PVector(item.xPos, item.yPos+20f)
+
                 var force = r
 
                 val distanceBetweenObjectAndVertexCurrent = PVector.dist(currentObjectPosition, vertex.currentLocation)
@@ -54,7 +55,7 @@ class CentralCircle(private val sketch: PApplet) {
     fun applyObjects(objects :ArrayList<CircleWithPattern>){
         this.items = objects
         for (items in this.items){
-            items.setSize(r/2)
+            items.size = r/2
         }
 
     }

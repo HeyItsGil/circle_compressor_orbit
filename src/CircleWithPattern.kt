@@ -5,6 +5,7 @@ class CircleWithPattern(private val sketch: PApplet) {
     var radius = sketch.width/2f
     var innerCircleRadius = radius/4f
     var angle = 2 * PI
+    var position = PVector(0f, 0f)
     var xPos = 0f
     var yPos = 0f
     var size: Float
@@ -14,15 +15,13 @@ class CircleWithPattern(private val sketch: PApplet) {
             this.innerCircleRadius = this.radius/4
         }
 
-    fun display(colourRange: Float = 0f, alphaRange: Float = 200f, xPos: Float = 0f, yPos: Float = 0f){
+    fun display(colourRange: Float = 0f, alphaRange: Float = 200f){
         sketch.pushMatrix()
         sketch.translate(sketch.width/2f, sketch.height/2f)
         sketch.stroke(0)
-        this.xPos = xPos
-        this.yPos = yPos
-        sketch.ellipse(xPos,yPos, radius.toFloat(), radius.toFloat())
+        sketch.ellipse(position.x,position.y, radius.toFloat(), radius.toFloat())
+        sketch.translate(position.x, position.y)
         sketch.pushMatrix()
-        sketch.translate(xPos, yPos)
         innerCirclesOne()
 //        innerCirclesTwo()
 //        innerCirclesThree()

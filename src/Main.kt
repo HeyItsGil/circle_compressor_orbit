@@ -16,7 +16,7 @@ class Main: PApplet(){
     }
 
     override fun settings() {
-//        size(640, 480)
+        size(640, 480)
         fullScreen()
     }
 

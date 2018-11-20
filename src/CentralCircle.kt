@@ -33,7 +33,7 @@ class CentralCircle(private val sketch: PApplet) {
             for (vertex in vertices) {
                 //Mouse position does not get updated with the translate() method
 //                val currentObjectPosition = PVector(sketch.mouseX.toFloat() - sketch.width / 2, sketch.mouseY.toFloat() - sketch.height / 2)
-                val currentObjectPosition = item.position.copy()
+                val currentObjectPosition = applyObjectForce(item.position.copy())
                 var force = r
 
                 val distanceBetweenObjectAndVertexCurrent = PVector.dist(currentObjectPosition, vertex.currentLocation)
@@ -65,7 +65,15 @@ class CentralCircle(private val sketch: PApplet) {
             items.size = r/2
             items.position.set(0f, -r*1.2f)
         }
+    }
 
+    private fun applyObjectForce(objectPosition: PVector): PVector{
+        val xForce = map(objectPosition.x, 0f, r, 0f, -30f)
+        val yForce = map(objectPosition.y, 0f, r, 0f, -30f)
+        objectPosition.x += xForce
+        objectPosition.y += yForce
+
+        return objectPosition
     }
 
     fun display() {

@@ -15,8 +15,8 @@ class CentralCircle(private val sketch: PApplet) {
     var sizeOfItem = 10f
 
     init {
-        distanceFromItem = r / 3
-        sizeOfItem = distanceFromItem * 0.85f
+        distanceFromItem = r / 3f
+        sizeOfItem = distanceFromItem * 0.5f
         val sides = 360
         val angle = 360 / sides
         for (i in 0 until sides) {
@@ -47,29 +47,34 @@ class CentralCircle(private val sketch: PApplet) {
 
                 sketch.vertex(vertex.currentLocation.x, vertex.currentLocation.y)
             }
-            var itemR = item.position.mag()
-            var itemAngle = atan2(item.position.y, item.position.x)
-            itemAngle += 0.01f
-
-            var itemX = itemR * cos(itemAngle)
-            var itemY = itemR * sin(itemAngle)
-
-            item.position.set(itemX, itemY)
+            respositionItem(item)
             sketch.endShape(PConstants.CLOSE)
         }
     }
 
+    private fun respositionItem(item: CircleWithPattern) {
+        val itemR = item.position.mag()
+        var itemAngle = atan2(item.position.y, item.position.x)
+        itemAngle += 0.005f
+
+        val itemX = itemR * cos(itemAngle)
+        val itemY = itemR * sin(itemAngle)
+
+        item.position.set(itemX, itemY)
+    }
+
     fun applyObjects(objects :ArrayList<CircleWithPattern>){
         this.items = objects
-        for (items in this.items){
-            items.size = r/2
-            items.position.set(0f, -r*1.2f)
-        }
+        items[0].size = r/2
+        items[0].position.set(0f, -r*1.2f)
+//
+//        items[1].size = r/2
+//        items[1].position.set(0f, 0f)
     }
 
     private fun applyObjectForce(objectPosition: PVector): PVector{
-        val xForce = map(objectPosition.x, 0f, r, 0f, -30f)
-        val yForce = map(objectPosition.y, 0f, r, 0f, -30f)
+        val xForce = map(objectPosition.x, 0f, r, 0f, -distanceFromItem/2f)
+        val yForce = map(objectPosition.y, 0f, r, 0f, -distanceFromItem/2f)
         objectPosition.x += xForce
         objectPosition.y += yForce
 

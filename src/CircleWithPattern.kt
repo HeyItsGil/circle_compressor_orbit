@@ -27,7 +27,7 @@ class CircleWithPattern(private val sketch: PApplet) {
 //        innerCirclesThree()
         innerCirclesFour()
         sketch.popMatrix()
-        angle+= 0.015
+        angle+= 0.005
         sketch.popMatrix()
     }
 
@@ -44,7 +44,7 @@ class CircleWithPattern(private val sketch: PApplet) {
     }
 
     fun innerCirclesTwo(){
-        sketch.rotate(angle.toFloat())
+        sketch.rotate(-angle.toFloat())
         drawCircle(0f, innerCircleRadius)
         drawCircle(-innerCircleRadius, innerCircleRadius*0.5f)
         drawCircle(innerCircleRadius, innerCircleRadius*0.5f)
@@ -55,7 +55,7 @@ class CircleWithPattern(private val sketch: PApplet) {
     }
 
     fun innerCirclesThree(){
-        sketch.rotate(angle.toFloat())
+        sketch.rotate(-angle.toFloat())
         drawCircle(0f, -innerCircleRadius*.75f, 1.5f)
         drawCircle(0f, innerCircleRadius*.75f, 1.5f)
         drawCircle(-innerCircleRadius*.75f, 0f, 1.5f)
@@ -64,7 +64,7 @@ class CircleWithPattern(private val sketch: PApplet) {
 
     fun innerCirclesFour(){
         val radFactor = 1.5f
-        sketch.rotate(angle.toFloat())
+        sketch.rotate(-angle.toFloat())
         drawCircle(0f, -innerCircleRadius*.75f, radFactor)
         drawCircle(0f, innerCircleRadius*.75f, radFactor)
         drawCircle(-innerCircleRadius*.75f, 0f, radFactor)

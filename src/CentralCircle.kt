@@ -76,9 +76,12 @@ class CentralCircle(private val sketch: PApplet) {
         this.items = objects
         items[0].size = r / 2
         items[0].position.set(0f, -r * 1.2f)
+        items[0].pattern = 0
 //
         items[1].size = r / 2
         items[1].position.set(0f, r * 1.2f)
+        items[1].pattern = 1
+//        items[1].rotateAntiClockwise = true
 
 //        items[0].size = r/2
 //        items[0].position.set(0f, r*1.2f)

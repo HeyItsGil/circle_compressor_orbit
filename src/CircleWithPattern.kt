@@ -4,10 +4,10 @@ import kotlin.math.PI
 class CircleWithPattern(private val sketch: PApplet) {
     var radius = sketch.width/2f
     var innerCircleRadius = radius/4f
-    var angle = 2 * PI
+    var angle = 2 * PI.toFloat()
     var position = PVector(0f, 0f)
-    var xPos = 0f
-    var yPos = 0f
+    var pattern = 0
+    var rotateAntiClockwise = false
     var size: Float
         get() = this.radius
         set(value) {
@@ -22,29 +22,33 @@ class CircleWithPattern(private val sketch: PApplet) {
         sketch.ellipse(position.x,position.y, radius.toFloat(), radius.toFloat())
         sketch.translate(position.x, position.y)
         sketch.pushMatrix()
-        innerCirclesOne()
-//        innerCirclesTwo()
-//        innerCirclesThree()
-//        innerCirclesFour()
+        displayPattern()
         sketch.popMatrix()
-        angle+= 0.005
+        if (rotateAntiClockwise) angle -= 0.005f else angle += 0.005f
         sketch.popMatrix()
     }
-
-
 
     fun drawCircle(x: Float, y: Float, radiusFactor: Float = 1f){
         sketch.ellipse(x, y, innerCircleRadius*radiusFactor, innerCircleRadius*radiusFactor)
     }
 
+    private fun displayPattern() {
+        when (pattern){
+            0 -> innerCirclesOne()
+            1 -> innerCirclesTwo()
+            2 -> innerCirclesThree()
+            3 -> innerCirclesFour()
+        }
+    }
+
     fun innerCirclesOne(){
-        sketch.rotate(-angle.toFloat())
+        sketch.rotate(angle)
         sketch.ellipse(0f, -innerCircleRadius, innerCircleRadius*2f, innerCircleRadius*2f)
         sketch.ellipse(0f, innerCircleRadius*1.5f, innerCircleRadius, innerCircleRadius)
     }
 
     fun innerCirclesTwo(){
-        sketch.rotate(-angle.toFloat())
+        sketch.rotate(angle)
         drawCircle(0f, innerCircleRadius)
         drawCircle(-innerCircleRadius, innerCircleRadius*0.5f)
         drawCircle(innerCircleRadius, innerCircleRadius*0.5f)
@@ -55,7 +59,7 @@ class CircleWithPattern(private val sketch: PApplet) {
     }
 
     fun innerCirclesThree(){
-        sketch.rotate(-angle.toFloat())
+        sketch.rotate(angle)
         drawCircle(0f, -innerCircleRadius*.75f, 1.5f)
         drawCircle(0f, innerCircleRadius*.75f, 1.5f)
         drawCircle(-innerCircleRadius*.75f, 0f, 1.5f)
@@ -64,7 +68,7 @@ class CircleWithPattern(private val sketch: PApplet) {
 
     fun innerCirclesFour(){
         val radFactor = 1.5f
-        sketch.rotate(-angle.toFloat())
+        sketch.rotate(angle)
         drawCircle(0f, -innerCircleRadius*.75f, radFactor)
         drawCircle(0f, innerCircleRadius*.75f, radFactor)
         drawCircle(-innerCircleRadius*.75f, 0f, radFactor)

@@ -22,10 +22,10 @@ class CircleWithPattern(private val sketch: PApplet) {
         sketch.ellipse(position.x,position.y, radius.toFloat(), radius.toFloat())
         sketch.translate(position.x, position.y)
         sketch.pushMatrix()
-//        innerCirclesOne()
+        innerCirclesOne()
 //        innerCirclesTwo()
 //        innerCirclesThree()
-        innerCirclesFour()
+//        innerCirclesFour()
         sketch.popMatrix()
         angle+= 0.005
         sketch.popMatrix()

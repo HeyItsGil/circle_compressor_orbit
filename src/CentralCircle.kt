@@ -63,7 +63,7 @@ class CentralCircle(private val sketch: PApplet) {
         for (item in this.items) {
             val itemR = item.position.mag()
             var itemAngle = atan2(item.position.y, item.position.x)
-            itemAngle += 0.005f
+            itemAngle += 0.0025f
 
             val itemX = itemR * cos(itemAngle)
             val itemY = itemR * sin(itemAngle)
@@ -76,15 +76,12 @@ class CentralCircle(private val sketch: PApplet) {
         this.items = objects
         items[0].size = r / 2
         items[0].position.set(0f, -r * 1.2f)
-        items[0].pattern = 0
-//
+
         items[1].size = r / 2
         items[1].position.set(0f, r * 1.2f)
         items[1].pattern = 1
 //        items[1].rotateAntiClockwise = true
 
-//        items[0].size = r/2
-//        items[0].position.set(0f, r*1.2f)
     }
 
     private fun applyObjectForce(objectPosition: PVector): PVector {

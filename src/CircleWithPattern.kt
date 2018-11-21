@@ -34,20 +34,27 @@ class CircleWithPattern(private val sketch: PApplet) {
 
     private fun displayPattern() {
         when (pattern){
-            0 -> innerCirclesOne()
-            1 -> innerCirclesTwo()
-            2 -> innerCirclesThree()
-            3 -> innerCirclesFour()
+            0 -> patternOne()
+            1 -> patternOneReflection()
+            2 -> patternTwo()
+            3 -> patternThree()
+            4 -> patternFour()
         }
     }
 
-    fun innerCirclesOne(){
+    fun patternOne(){
         sketch.rotate(angle)
         sketch.ellipse(0f, -innerCircleRadius, innerCircleRadius*2f, innerCircleRadius*2f)
         sketch.ellipse(0f, innerCircleRadius*1.5f, innerCircleRadius, innerCircleRadius)
     }
 
-    fun innerCirclesTwo(){
+    fun patternOneReflection() {
+        sketch.rotate(angle)
+        drawCircle(0f, innerCircleRadius, 2f)
+        drawCircle(0f, -innerCircleRadius*1.5f)
+    }
+
+    fun patternTwo(){
         sketch.rotate(angle)
         drawCircle(0f, innerCircleRadius)
         drawCircle(-innerCircleRadius, innerCircleRadius*0.5f)
@@ -58,7 +65,7 @@ class CircleWithPattern(private val sketch: PApplet) {
         drawCircle(innerCircleRadius, -innerCircleRadius*.5f)
     }
 
-    fun innerCirclesThree(){
+    fun patternThree(){
         sketch.rotate(angle)
         drawCircle(0f, -innerCircleRadius*.75f, 1.5f)
         drawCircle(0f, innerCircleRadius*.75f, 1.5f)
@@ -66,7 +73,7 @@ class CircleWithPattern(private val sketch: PApplet) {
         drawCircle(innerCircleRadius*0.75f, 0f, 1.5f)
     }
 
-    fun innerCirclesFour(){
+    fun patternFour(){
         val radFactor = 1.5f
         sketch.rotate(angle)
         drawCircle(0f, -innerCircleRadius*.75f, radFactor)

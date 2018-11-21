@@ -16,14 +16,15 @@ class Main: PApplet(){
     }
 
     override fun settings() {
-//        size(640,\ 480)
+//        size(640, 480)
         fullScreen()
 //        pixelDensity(2)
     }
 
     override fun setup() {
         colorMode(PConstants.HSB, 360f, 100f, 100f)
-        warpyCircle.applyObjects(arrayListOf(CircleWithPattern(this)))
+//        warpyCircle.applyObjects(arrayListOf(CircleWithPattern(this)))
+        warpyCircle.applyObjects(arrayListOf(CircleWithPattern(this),CircleWithPattern(this)))
     }
 
     override fun draw() {

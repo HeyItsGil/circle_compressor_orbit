@@ -6,7 +6,7 @@ import processing.core.PVector
 class CentralCircle(private val sketch: PApplet) {
     var vertices = mutableListOf<Vertex>()
     private val r: Float by lazy {
-        sketch.width / 5f
+        sketch.width / 6f
     }
 
     lateinit var items: ArrayList<CircleWithPattern>
@@ -28,7 +28,7 @@ class CentralCircle(private val sketch: PApplet) {
     }
 
     private fun updateVertices() {
-        sketch.fill(255f, 0f)
+        sketch.fill(339f, 75f,100f,100f)
         sketch.beginShape()
         for (vertex in vertices) {
             var force = r
@@ -37,8 +37,8 @@ class CentralCircle(private val sketch: PApplet) {
             vertex.currentLocation.mult(force)
 
             sketch.vertex(vertex.currentLocation.x, vertex.currentLocation.y)
-
         }
+
         respositionItem()
         sketch.endShape(PConstants.CLOSE)
     }
@@ -63,7 +63,7 @@ class CentralCircle(private val sketch: PApplet) {
         for (item in this.items) {
             val itemR = item.position.mag()
             var itemAngle = atan2(item.position.y, item.position.x)
-            itemAngle += 0.0025f
+            itemAngle += 0.0015f
 
             val itemX = itemR * cos(itemAngle)
             val itemY = itemR * sin(itemAngle)
@@ -75,13 +75,11 @@ class CentralCircle(private val sketch: PApplet) {
     fun applyObjects(objects: ArrayList<CircleWithPattern>) {
         this.items = objects
         items[0].size = r / 2
-        items[0].position.set(0f, -r * 1.2f)
+        items[0].position.set(-r * 1.2f, 0f)
 
         items[1].size = r / 2
-        items[1].position.set(0f, r * 1.2f)
+        items[1].position.set(r * 1.2f, 0f)
         items[1].pattern = 1
-        items[1].rotateAntiClockwise = true
-
     }
 
     private fun applyObjectForce(objectPosition: PVector): PVector {
@@ -94,7 +92,7 @@ class CentralCircle(private val sketch: PApplet) {
     }
 
     fun display() {
-        sketch.fill(0f, 0f)
+//        sketch.fill(0f, 0f)
         sketch.pushMatrix()
         displayShapes()
         sketch.translate(sketch.width / 2f, sketch.height / 2f)

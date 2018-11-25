@@ -19,7 +19,8 @@ class CircleWithPattern(private val sketch: PApplet) {
     fun display(colourRange: Float = 0f, alphaRange: Float = 200f){
         sketch.pushMatrix()
         sketch.translate(sketch.width/2f, sketch.height/2f)
-        sketch.stroke(0)
+//        sketch.stroke(0)
+        sketch.fill(219f, 80f, 100f, 100f)
         sketch.ellipse(position.x,position.y, radius.toFloat(), radius.toFloat())
         sketch.translate(position.x, position.y)
         sketch.pushMatrix()

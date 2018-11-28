@@ -28,7 +28,7 @@ class CentralCircle(private val sketch: PApplet) {
     }
 
     private fun updateVertices() {
-        sketch.fill(339f, 75f,100f,100f)
+        sketch.fill(219f, 80f,100f,100f)
         sketch.beginShape()
         for (vertex in vertices) {
             var force = r

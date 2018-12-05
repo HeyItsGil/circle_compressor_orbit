@@ -26,7 +26,11 @@ class Main: PApplet(){
         colorMode(PConstants.HSB, 360f, 100f, 100f)
 //        warpyCircle.applyObjects(arrayListOf(CircleWithPattern(this)))
         noStroke()
-        warpyCircle.applyObjects(arrayListOf(CircleWithPattern(this),CircleWithPattern(this)))
+        warpyCircle.applyObjects(arrayListOf(CircleWithPattern(this),
+                                            CircleWithPattern(this),
+                                            CircleWithPattern(this),
+                                            CircleWithPattern(this),
+                                            CircleWithPattern(this)))
     }
 
     override fun draw() {

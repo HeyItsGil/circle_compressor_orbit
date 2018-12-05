@@ -80,6 +80,21 @@ class CentralCircle(private val sketch: PApplet) {
         items[1].size = r / 2
         items[1].position.set(r * 1.2f, 0f)
         items[1].pattern = 1
+
+        items[2].size = r / 2
+        items[2].position.set(0f, -r * .5f)
+        items[2].pattern = 3
+        items[2].applyColour(39f, 61f, 100f)
+
+        items[3].size = r / 2
+        items[3].position.set(r * .5f, r * .25f)
+        items[3].pattern = 3
+        items[3].applyColour(39f, 61f, 100f)
+
+        items[4].size = r / 2
+        items[4].position.set(-r * .5f, r * .25f)
+        items[4].pattern = 3
+        items[4].applyColour(39f, 61f, 100f)
     }
 
     private fun applyObjectForce(objectPosition: PVector): PVector {
@@ -94,9 +109,9 @@ class CentralCircle(private val sketch: PApplet) {
     fun display() {
 //        sketch.fill(0f, 0f)
         sketch.pushMatrix()
-        displayShapes()
         sketch.translate(sketch.width / 2f, sketch.height / 2f)
         updateVertices()
+        displayShapes()
         sketch.popMatrix()
     }
 

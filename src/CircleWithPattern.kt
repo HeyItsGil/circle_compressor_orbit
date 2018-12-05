@@ -15,12 +15,13 @@ class CircleWithPattern(private val sketch: PApplet) {
             this.radius = value
             this.innerCircleRadius = this.radius/4
         }
+    var shapeColor = this.sketch.color(219f, 61f, 100f, 100f)
 
     fun display(colourRange: Float = 0f, alphaRange: Float = 200f){
         sketch.pushMatrix()
-        sketch.translate(sketch.width/2f, sketch.height/2f)
+//        sketch.translate(sketch.width/2f, sketch.height/2f)
 //        sketch.stroke(0)
-        sketch.fill(219f, 61f, 100f, 100f)
+        sketch.fill(this.shapeColor)
         sketch.ellipse(position.x,position.y, radius.toFloat(), radius.toFloat())
         sketch.translate(position.x, position.y)
         sketch.pushMatrix()
@@ -32,6 +33,11 @@ class CircleWithPattern(private val sketch: PApplet) {
 
     fun drawCircle(x: Float, y: Float, radiusFactor: Float = 1f){
         sketch.ellipse(x, y, innerCircleRadius*radiusFactor, innerCircleRadius*radiusFactor)
+    }
+
+    //named params 'value' as the colorMode could be either RGB or HSB
+    fun applyColour(value1: Float, value2: Float, value3: Float, alpha: Float = 100f){
+        this.shapeColor = sketch.color(value1, value2, value3, alpha)
     }
 
     private fun displayPattern() {

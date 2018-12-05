@@ -3,6 +3,9 @@ import processing.core.PApplet
 import processing.core.PConstants
 
 class Main: PApplet(){
+    private val numberOfInnerShapes = 5
+    private var shapesArray: ArrayList<CircleWithPattern> = ArrayList<CircleWithPattern>()
+
     private val warpyCircle: CentralCircle by lazy {
         CentralCircle(this)
     }
@@ -26,12 +29,10 @@ class Main: PApplet(){
         colorMode(PConstants.HSB, 360f, 100f, 100f)
 //        warpyCircle.applyObjects(arrayListOf(CircleWithPattern(this)))
         noStroke()
-        warpyCircle.applyObjects(arrayListOf(CircleWithPattern(this),
-                                            CircleWithPattern(this),
-                                            CircleWithPattern(this),
-                                            CircleWithPattern(this),
-                                            CircleWithPattern(this),
-                                            CircleWithPattern(this)))
+        for (i in 0..numberOfInnerShapes){
+            shapesArray.add(CircleWithPattern(this))
+        }
+        warpyCircle.applyObjects(shapesArray)
     }
 
     override fun draw() {

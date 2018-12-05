@@ -30,6 +30,7 @@ class Main: PApplet(){
                                             CircleWithPattern(this),
                                             CircleWithPattern(this),
                                             CircleWithPattern(this),
+                                            CircleWithPattern(this),
                                             CircleWithPattern(this)))
     }
 

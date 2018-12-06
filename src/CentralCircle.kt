@@ -66,7 +66,7 @@ class CentralCircle(private val sketch: PApplet) {
             if (item.rotateAntiClockwise) itemAngle -= 0.0015f else itemAngle += 0.0015f
 
             val itemX = itemR * cos(itemAngle)
-            val itemY = itemR * sin(itemAngle)
+            val itemY = (itemR * sin(itemAngle+0.0019f))
 
             item.position.set(itemX, itemY)
         }
@@ -77,10 +77,12 @@ class CentralCircle(private val sketch: PApplet) {
         //1. Shapes on the outside
         items[0].size = r / 2
         items[0].position.set(-r * 1.2f, 0f)
+        items[0].rotatePatternAntiClockwise = true
 
         items[1].size = r / 2
         items[1].position.set(r * 1.2f, 0f)
         items[1].pattern = 1
+        items[1].rotatePatternAntiClockwise = true
 
         //2. 3 small shapes on the inside
         val polarR2 = r * .75f

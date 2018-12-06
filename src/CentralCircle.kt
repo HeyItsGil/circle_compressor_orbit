@@ -87,14 +87,19 @@ class CentralCircle(private val sketch: PApplet) {
         items[2].applyColour(39f, 61f, 100f)
 
         items[3].size = r / 2
-        items[3].position.set(r * .5f, r * .25f)
+        items[3].position.set(r * .5f, r * .3f)
         items[3].pattern = 3
         items[3].applyColour(39f, 61f, 100f)
 
         items[4].size = r / 2
-        items[4].position.set(-r * .5f, r * .25f)
+        items[4].position.set(-r * .5f, r * .3f)
         items[4].pattern = 3
         items[4].applyColour(39f, 61f, 100f)
+
+        items[5].size = r / 1.25f
+        items[5].pattern = 3
+        items[5].applyColour(39f, 61f, 100f)
+
     }
 
     private fun applyObjectForce(objectPosition: PVector): PVector {

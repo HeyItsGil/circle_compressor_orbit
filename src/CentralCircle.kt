@@ -63,7 +63,7 @@ class CentralCircle(private val sketch: PApplet) {
         for (item in this.items) {
             val itemR = item.position.mag()
             var itemAngle = atan2(item.position.y, item.position.x)
-            itemAngle += 0.0015f
+            if (item.rotateAntiClockwise) itemAngle -= 0.0015f else itemAngle += 0.0015f
 
             val itemX = itemR * cos(itemAngle)
             val itemY = itemR * sin(itemAngle)
@@ -93,6 +93,7 @@ class CentralCircle(private val sketch: PApplet) {
         items[2].position.set(x, y)
         items[2].pattern = 3
         items[2].applyColour(39f, 61f, 100f)
+        items[2].rotateAntiClockwise = true
 
         theta += (2*PI)/3
         x = polarR2 * cos(theta)
@@ -101,6 +102,7 @@ class CentralCircle(private val sketch: PApplet) {
         items[3].position.set(x, y)
         items[3].pattern = 3
         items[3].applyColour(39f, 61f, 100f)
+        items[3].rotateAntiClockwise = true
 
         theta += (2*PI)/3
         x = polarR2 * cos(theta)
@@ -109,6 +111,7 @@ class CentralCircle(private val sketch: PApplet) {
         items[4].position.set(x, y)
         items[4].pattern = 3
         items[4].applyColour(39f, 61f, 100f)
+        items[4].rotateAntiClockwise = true
 
         //3. Big shape in the centre
         items[5].size = r / 1.25f

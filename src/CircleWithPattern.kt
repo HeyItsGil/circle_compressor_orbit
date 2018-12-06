@@ -7,6 +7,7 @@ class CircleWithPattern(private val sketch: PApplet) {
     var angle = 2 * PI.toFloat()
     var position = PVector(0f, 0f)
     var pattern = 0
+    var rotate = true
     var rotateAntiClockwise = false
     var rotationSpeed = 0.005f
     var size: Float
@@ -27,7 +28,9 @@ class CircleWithPattern(private val sketch: PApplet) {
         sketch.pushMatrix()
         displayPattern()
         sketch.popMatrix()
-        if (rotateAntiClockwise) angle -= rotationSpeed else angle += rotationSpeed
+        if (rotate) {
+            if (rotateAntiClockwise) angle -= rotationSpeed else angle += rotationSpeed
+        }
         sketch.popMatrix()
     }
 

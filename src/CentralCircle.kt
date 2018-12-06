@@ -99,6 +99,7 @@ class CentralCircle(private val sketch: PApplet) {
         items[5].size = r / 1.25f
         items[5].pattern = 3
         items[5].applyColour(39f, 61f, 100f)
+        items[5].rotate = false
 
     }
 

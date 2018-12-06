@@ -27,7 +27,6 @@ class Main: PApplet(){
 
     override fun setup() {
         colorMode(PConstants.HSB, 360f, 100f, 100f)
-//        warpyCircle.applyObjects(arrayListOf(CircleWithPattern(this)))
         noStroke()
         for (i in 0..numberOfInnerShapes){
             shapesArray.add(CircleWithPattern(this))

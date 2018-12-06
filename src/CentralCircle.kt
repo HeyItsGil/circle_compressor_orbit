@@ -83,9 +83,10 @@ class CentralCircle(private val sketch: PApplet) {
         items[1].pattern = 1
 
         //2. 3 small shapes on the inside
-        val polarR2 = r * .5f
-        var theta = 0f
+        val polarR2 = r * .75f
+        val angleGradations = 3*PI/2
 
+        var theta = 3 * (PI/2)
         var x = polarR2 * cos(theta)
         var y = polarR2 * sin(theta)
         items[2].size = r / 2
@@ -93,11 +94,17 @@ class CentralCircle(private val sketch: PApplet) {
         items[2].pattern = 3
         items[2].applyColour(39f, 61f, 100f)
 
+        theta += (2*PI)/3
+        x = polarR2 * cos(theta)
+        y = polarR2 * sin(theta)
         items[3].size = r / 2
         items[3].position.set(x, y)
         items[3].pattern = 3
         items[3].applyColour(39f, 61f, 100f)
 
+        theta += (2*PI)/3
+        x = polarR2 * cos(theta)
+        y = polarR2 * sin(theta)
         items[4].size = r / 2
         items[4].position.set(x, y)
         items[4].pattern = 3

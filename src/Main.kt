@@ -22,7 +22,7 @@ class Main: PApplet(){
         size(640, 480)
 //        fullScreen()
 //        pixelDensity(2)
-//        noLoop()
+        noLoop()
     }
 
     override fun setup() {

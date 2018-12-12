@@ -43,8 +43,8 @@ class CentralCircle(private val sketch: PApplet) {
         sketch.endShape(PConstants.CLOSE)
     }
 
-    private fun shapeDistanceChecker(vertex: Vertex, force: Float): Float {
-        var force1 = force
+    private fun shapeDistanceChecker(vertex: Vertex, defaultForce: Float): Float {
+        var force = defaultForce
         for (item in this.items) {
             //Mouse position does not get updated with the translate() method
     //                val currentObjectPosition = PVector(sketch.mouseX.toFloat() - sketch.width / 2, sketch.mouseY.toFloat() - sketch.height / 2)
@@ -53,20 +53,31 @@ class CentralCircle(private val sketch: PApplet) {
             val distanceBetweenObjectAndVertexCurrent = PVector.dist(currentObjectPosition, vertex.currentLocation)
             if (distanceBetweenObjectAndVertexCurrent < distanceFromItem) {
                 val vertexLimiter = map(distanceBetweenObjectAndVertexCurrent, 0f, distanceFromItem, sizeOfItem, 0f)
-                force1 -= vertexLimiter
+                force -= vertexLimiter
             }
         }
-        return force1
+        return force
     }
 
     private fun respositionItem() {
         for (item in this.items) {
             val itemR = item.position.mag()
             var itemAngle = atan2(item.position.y, item.position.x)
-            if (item.rotateAntiClockwise) itemAngle -= 0.0015f else itemAngle += 0.0015f
+            if (item.rotateAntiClockwise) itemAngle -= 0.0025f else itemAngle += 0.0025f
 
-            val itemX = itemR * cos(itemAngle)
-            val itemY = (itemR * sin(itemAngle+0.0019f))
+            var itemX = 0f
+            var itemY = 0f
+
+            if (this.items.indexOf(item) < 1){
+//                itemX += cos(itemX * sketch.frameRate/60)
+//                itemY += sin(itemY * sketch.frameRate/60)
+
+                //insert code for modifying itemR sinusoidally(???)
+            }
+
+            itemX = itemR * cos(itemAngle)
+            itemY = itemR * sin(itemAngle)
+
 
             item.position.set(itemX, itemY)
         }

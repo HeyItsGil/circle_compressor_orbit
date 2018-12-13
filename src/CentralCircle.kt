@@ -13,6 +13,7 @@ class CentralCircle(private val sketch: PApplet) {
 
     var distanceFromItem = 0f
     var sizeOfItem = 10f
+    var outSideAngle = 0.01f
 
     init {
         distanceFromItem = r / 3f
@@ -61,7 +62,7 @@ class CentralCircle(private val sketch: PApplet) {
 
     private fun respositionItem() {
         for (item in this.items) {
-            val itemR = item.position.mag()
+            var itemR = item.position.mag()
             var itemAngle = atan2(item.position.y, item.position.x)
             if (item.rotateAntiClockwise) itemAngle -= 0.0025f else itemAngle += 0.0025f
 
@@ -69,10 +70,9 @@ class CentralCircle(private val sketch: PApplet) {
             var itemY = 0f
 
             if (this.items.indexOf(item) < 1){
-//                itemX += cos(itemX * sketch.frameRate/60)
-//                itemY += sin(itemY * sketch.frameRate/60)
-
                 //insert code for modifying itemR sinusoidally(???)
+                itemR = (r*1.2f) * sin(outSideAngle)
+                itemR = constrain(itemR, r*1.2f, r * 2f)
             }
 
             itemX = itemR * cos(itemAngle)
@@ -80,6 +80,7 @@ class CentralCircle(private val sketch: PApplet) {
 
 
             item.position.set(itemX, itemY)
+            outSideAngle += 0.009f
         }
     }
 

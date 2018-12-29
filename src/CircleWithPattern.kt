@@ -17,12 +17,11 @@ class CircleWithPattern(private val sketch: PApplet) {
             this.radius = value
             this.innerCircleRadius = this.radius/4
         }
+    var orbitingPace = 0.0025f
     var shapeColor = this.sketch.color(219f, 61f, 100f, 100f)
 
     fun display(colourRange: Float = 0f, alphaRange: Float = 200f){
         sketch.pushMatrix()
-//        sketch.translate(sketch.width/2f, sketch.height/2f)
-//        sketch.stroke(0)
         sketch.fill(this.shapeColor)
         sketch.ellipse(position.x,position.y, radius.toFloat(), radius.toFloat())
         sketch.translate(position.x, position.y)

@@ -14,7 +14,6 @@ class CentralCircle(private val sketch: PApplet) {
     var distanceFromItem = 0f
     var sizeOfItem = 10f
     var outSideAngle = 0.75f
-    var itemAngleIncrementValue = 0.0025f
     var outSideAngleOriginal = outSideAngle
     var pullInward = false
 
@@ -67,14 +66,12 @@ class CentralCircle(private val sketch: PApplet) {
         for (item in this.items) {
             var itemR = item.position.mag()
             var itemAngle = atan2(item.position.y, item.position.x)
-            if (item.rotateAntiClockwise) itemAngle -= itemAngleIncrementValue else itemAngle += itemAngleIncrementValue
+            if (item.rotateAntiClockwise) itemAngle -= item.orbitingPace else itemAngle += item.orbitingPace
 
             var itemX = 0f
             var itemY = 0f
 
             if (this.items.indexOf(item) < 2){
-                //insert code for modifying itemR sinusoidally(???)
-                //if item position is the same as the original, reset outside angle
                 if (outSideAngle >= 2.4f) outSideAngle = outSideAngleOriginal
                 itemR = (r*1.75f) * sin(outSideAngle)
                 itemR = constrain(itemR, r*1.19f, r * 2f)
@@ -85,8 +82,6 @@ class CentralCircle(private val sketch: PApplet) {
 
             item.position.set(itemX, itemY)
             outSideAngle += 0.000625f
-//            if (item.position.mag() >= r*2f) pullInward = true else if (item.position.mag() <= r*1.2f) pullInward = false
-//            if (pullInward) outSideAngle -= 0.009f else outSideAngle += 0.009f
             println(outSideAngle)
         }
     }

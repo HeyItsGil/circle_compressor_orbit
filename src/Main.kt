@@ -22,11 +22,9 @@ class Main: PApplet(){
         size(640, 480)
 //        fullScreen()
 //        pixelDensity(2)
-//        noLoop()
     }
 
     override fun setup() {
-//        frameRate(10f)
         colorMode(PConstants.HSB, 360f, 100f, 100f)
         noStroke()
         for (i in 0..numberOfInnerShapes){

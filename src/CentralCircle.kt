@@ -13,8 +13,8 @@ class CentralCircle(private val sketch: PApplet) {
 
     var distanceFromItem = 0f
     var sizeOfItem = 10f
-    var outSideAngle = 0.75f
-    var outSideAngleOriginal = outSideAngle
+    var outsideAngle = 0.75f
+    var outsideAngleOriginal = outsideAngle
     var pullInward = false
 
     init {
@@ -49,8 +49,6 @@ class CentralCircle(private val sketch: PApplet) {
     private fun shapeDistanceChecker(vertex: Vertex, defaultForce: Float): Float {
         var force = defaultForce
         for (item in this.items) {
-            //Mouse position does not get updated with the translate() method
-    //                val currentObjectPosition = PVector(sketch.mouseX.toFloat() - sketch.width / 2, sketch.mouseY.toFloat() - sketch.height / 2)
             val currentObjectPosition = applyObjectForce(item.position.copy())
 
             val distanceBetweenObjectAndVertexCurrent = PVector.dist(currentObjectPosition, vertex.currentLocation)
@@ -66,23 +64,22 @@ class CentralCircle(private val sketch: PApplet) {
         for (item in this.items) {
             var itemR = item.position.mag()
             var itemAngle = atan2(item.position.y, item.position.x)
-            if (item.rotateAntiClockwise) itemAngle -= item.orbitingPace else itemAngle += item.orbitingPace
+            if (item.rotateAntiClockwise) itemAngle -= item.rotationSpeed else itemAngle += item.rotationSpeed
 
             var itemX = 0f
             var itemY = 0f
 
             if (this.items.indexOf(item) < 2){
-                if (outSideAngle >= 2.4f) outSideAngle = outSideAngleOriginal
-                itemR = (r*1.75f) * sin(outSideAngle)
-                itemR = constrain(itemR, r*1.19f, r * 2f)
+                if (item.bounceAngle >= 2.4f) item.bounceAngle = item.originalBounceAngle
+                itemR = (r*1.75f) * sin(item.bounceAngle)
+                itemR = constrain(itemR, r*1.2f, r * 2f)
             }
 
             itemX = itemR * cos(itemAngle)
             itemY = itemR * sin(itemAngle)
 
             item.position.set(itemX, itemY)
-            outSideAngle += 0.000625f
-            println(outSideAngle)
+            item.bounceAngle += item.bouncingSpeed
         }
     }
 

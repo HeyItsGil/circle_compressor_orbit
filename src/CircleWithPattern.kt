@@ -10,14 +10,17 @@ class CircleWithPattern(private val sketch: PApplet) {
     var rotate = true
     var rotateAntiClockwise = false
     var rotatePatternAntiClockwise = false
-    var rotationSpeed = 0.005f
+    var rotationSpeed = 0.0025f
+    var patternRotationSpeed = 0.005f
+    var bounceAngle = 0.75f
+    var originalBounceAngle = bounceAngle
+    var bouncingSpeed = 0.00625f
     var size: Float
         get() = this.radius
         set(value) {
             this.radius = value
             this.innerCircleRadius = this.radius/4
         }
-    var orbitingPace = 0.0025f
     var shapeColor = this.sketch.color(219f, 61f, 100f, 100f)
 
     fun display(colourRange: Float = 0f, alphaRange: Float = 200f){
@@ -29,7 +32,7 @@ class CircleWithPattern(private val sketch: PApplet) {
         displayPattern()
         sketch.popMatrix()
         if (rotate) {
-            if (rotatePatternAntiClockwise) angle -= rotationSpeed else angle += rotationSpeed
+            if (rotatePatternAntiClockwise) angle -= patternRotationSpeed else angle += patternRotationSpeed
         }
         sketch.popMatrix()
     }

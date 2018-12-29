@@ -26,6 +26,7 @@ class Main: PApplet(){
     }
 
     override fun setup() {
+//        frameRate(10f)
         colorMode(PConstants.HSB, 360f, 100f, 100f)
         noStroke()
         for (i in 0..numberOfInnerShapes){

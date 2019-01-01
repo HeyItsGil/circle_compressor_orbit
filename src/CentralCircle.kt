@@ -55,6 +55,18 @@ class CentralCircle(private val sketch: PApplet) {
             if (distanceBetweenObjectAndVertexCurrent < distanceFromItem) {
                 val vertexLimiter = map(distanceBetweenObjectAndVertexCurrent, 0f, distanceFromItem, sizeOfItem, 0f)
                 force -= vertexLimiter
+
+                if (this.items.indexOf(item) in 2..4){
+                    var itemR = item.position.mag()
+                    var itemAngle = atan2(item.position.y, item.position.x)
+
+                    itemR -= vertexLimiter
+
+                    var itemX = itemR * cos(itemAngle)
+                    var itemY = itemR * sin(itemAngle)
+
+                    item.position.set(itemX, itemY)
+                }
             }
         }
         return force

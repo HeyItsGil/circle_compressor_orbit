@@ -60,7 +60,7 @@ class CentralCircle(private val sketch: PApplet) {
                     var itemR = item.position.mag()
                     var itemAngle = atan2(item.position.y, item.position.x)
 
-                    itemR -= vertexLimiter
+                    itemR = force-item.innerCircleRadius
 
                     var itemX = itemR * cos(itemAngle)
                     var itemY = itemR * sin(itemAngle)

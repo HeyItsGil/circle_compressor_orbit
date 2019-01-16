@@ -57,15 +57,30 @@ class CentralCircle(private val sketch: PApplet) {
                 force -= vertexLimiter
 
                 if (this.items.indexOf(item) in 2..4){
-                    var itemR = item.position.mag()
+                    var itemR = item.originalPosition.mag()
                     var itemAngle = atan2(item.position.y, item.position.x)
 
-                    itemR = force-item.innerCircleRadius
+                    itemR -= force
+                    itemR = constrain(itemR, force-item.radius/4, force)
 
                     var itemX = itemR * cos(itemAngle)
                     var itemY = itemR * sin(itemAngle)
-
                     item.position.set(itemX, itemY)
+
+//                    item.position.normalize()
+//                    item.position.mult(force-(item.radius/2f))
+                }
+            } else {
+                if (this.items.indexOf(item) in 2..4){
+//                    var itemR = item.originalPosition.mag()
+//                    var itemAngle = atan2(item.position.y, item.position.x)
+//
+//                    var itemX = itemR * cos(itemAngle)
+//                    var itemY = itemR * sin(itemAngle)
+//                    item.position.set(itemX, itemY)
+
+//                    item.position.normalize()
+//                    item.position.mult(r * .75f)
                 }
             }
         }
@@ -100,10 +115,12 @@ class CentralCircle(private val sketch: PApplet) {
         //1. Shapes on the outside
         items[0].size = r / 2
         items[0].position.set(-r * 1.2f, 0f)
+        items[0].originalPosition.set(-r * 1.2f, 0f)
         items[0].rotatePatternAntiClockwise = true
 
         items[1].size = r / 2
         items[1].position.set(r * 1.2f, 0f)
+        items[1].originalPosition.set(r * 1.2f, 0f)
         items[1].pattern = 1
         items[1].rotatePatternAntiClockwise = true
 
@@ -116,6 +133,7 @@ class CentralCircle(private val sketch: PApplet) {
         var y = polarR2 * sin(theta)
         items[2].size = r / 2
         items[2].position.set(x, y)
+        items[2].originalPosition.set(x, y)
         items[2].pattern = 3
         items[2].applyColour(39f, 61f, 100f)
         items[2].rotateAntiClockwise = true
@@ -125,6 +143,7 @@ class CentralCircle(private val sketch: PApplet) {
         y = polarR2 * sin(theta)
         items[3].size = r / 2
         items[3].position.set(x, y)
+        items[3].originalPosition.set(x, y)
         items[3].pattern = 3
         items[3].applyColour(39f, 61f, 100f)
         items[3].rotateAntiClockwise = true
@@ -134,6 +153,7 @@ class CentralCircle(private val sketch: PApplet) {
         y = polarR2 * sin(theta)
         items[4].size = r / 2
         items[4].position.set(x, y)
+        items[4].originalPosition.set(x, y)
         items[4].pattern = 3
         items[4].applyColour(39f, 61f, 100f)
         items[4].rotateAntiClockwise = true

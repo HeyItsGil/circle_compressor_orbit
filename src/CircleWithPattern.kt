@@ -6,6 +6,7 @@ class CircleWithPattern(private val sketch: PApplet) {
     var innerCircleRadius = radius/4f
     var angle = 2 * PI.toFloat()
     var position = PVector(0f, 0f)
+    var originalPosition = PVector(0f, 0f)
     var pattern = 0
     var rotate = true
     var rotateAntiClockwise = false
